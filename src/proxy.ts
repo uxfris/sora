@@ -1,4 +1,4 @@
-import { auth } from "@/src/lib/auth/server";
+import { auth } from "@/src/services/auth/server";
 
 export default auth.middleware({
   // Redirects unauthenticated users to sign-in page

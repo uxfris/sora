@@ -32,3 +32,25 @@
 │ └── lib/                  # GLOBAL HELPERS
 │     ├── utils.ts          # Class merging (cn helper) and date/time formatters
 │     └── validator.ts      # Shared validation logic (e.g., input character limits)
+
+
+
+services/
+├── ai/                 # LLM orchestration
+├── db/                 # Database access
+├── auth/               # Authentication/authorization helpers
+├── storage/            # File storage (S3, R2, Supabase Storage)
+├── payments/           # Stripe, Paddle, Lemon Squeezy
+├── email/              # Resend, SendGrid, Postmark
+├── search/             # Meilisearch, Typesense, Algolia
+├── cache/              # Redis, Upstash
+├── queue/              # BullMQ, Inngest, Trigger.dev
+├── analytics/          # PostHog, Mixpanel, GA
+├── telemetry/          # OpenTelemetry, logging
+├── vector/             # Pinecone, Qdrant, Weaviate
+├── embeddings/         # Embedding generation
+├── documents/          # PDF parsing, OCR, chunking
+├── web-search/         # Tavily, Serper, Exa
+├── notifications/      # Push notifications
+├── billing/            # Usage metering and quotas
+└── jobs/               # Background task orchestration
