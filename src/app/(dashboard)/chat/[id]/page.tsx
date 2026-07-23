@@ -1,3 +1,7 @@
 export default function Chat() {
-  return <div>Conversation</div>;
+  return (
+    <div className="h-screen flex items-center justify-center">
+      Conversation
+    </div>
+  );
 }

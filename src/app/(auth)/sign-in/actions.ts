@@ -1,6 +1,6 @@
 "use server";
 
-import { auth } from "@/src/services/auth/server";
+import { auth } from "@/services/auth/server";
 import { redirect } from "next/navigation";
 
 export async function signInWithEmail(
