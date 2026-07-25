@@ -65,7 +65,7 @@ function SettingButton({ className }: { className: string }) {
           <p>Settings</p>
         </TooltipContent>
       </Tooltip>
-      <DropdownMenuContent align="start" className="min-w-0 w-64">
+      <DropdownMenuContent align="start" className="w-64">
         <DropdownMenuItem>
           <HugeiconsIcon icon={HistoryIcon} size={20} className="size-5" />
           Activity
@@ -79,7 +79,7 @@ function SettingButton({ className }: { className: string }) {
             <HugeiconsIcon icon={DarkModeIcon} size={20} className="size-5" />
             Theme
           </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent className="min-w-0 w-44">
+          <DropdownMenuSubContent className="w-44">
             <DropdownMenuItem className="justify-between">
               System
               <Check />
