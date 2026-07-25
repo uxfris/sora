@@ -6,7 +6,7 @@ import AppSidebarContent from "./sidebar-content";
 
 export function AppSidebar() {
   return (
-    <Sidebar className="border-none">
+    <Sidebar className="border-none bg-background" collapsible="icon">
       <AppSidebarHeader />
       <AppSidebarContent />
       <AppSidebarFooter />

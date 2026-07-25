@@ -37,7 +37,7 @@ export default function AppSidebarContent() {
 
   return (
     <SidebarContent>
-      <SidebarGroup>
+      <SidebarGroup className="group-data-[collapsible=icon]:hidden">
         <Collapsible open={notebookOpen} onOpenChange={notebookOnOpenChange}>
           <SidebarGroupLabel
             className="gap-1 cursor-pointer w-full group/label"
@@ -102,7 +102,7 @@ export default function AppSidebarContent() {
           </SidebarGroupContent>
         </Collapsible>
       </SidebarGroup>
-      <SidebarGroup>
+      <SidebarGroup className="group-data-[collapsible=icon]:hidden">
         <Collapsible open={recentOpen} onOpenChange={recentOnOpenChange}>
           <SidebarGroupLabel
             className="gap-1 cursor-pointer w-full group/label"
