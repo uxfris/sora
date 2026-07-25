@@ -79,7 +79,12 @@ transition-opacity"
                 </Tooltip>
               </div>
             </div>
-            <span className="font-medium group-data-[collapsible=icon]:hidden">
+            <span
+              className="font-medium transition-all duration-100
+            group-data-[collapsible=icon]:w-0
+            group-data-[collapsible=icon]:opacity-0
+            group-data-[collapsible=icon]:ml-0"
+            >
               Gemini
             </span>
           </Link>

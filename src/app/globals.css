@@ -47,6 +47,7 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
   --text-sm: 0.8125rem;
+  --box-shadow-inset: 0 0px 120px -30px rgba(0, 0, 0, 0.1);
 }
 
 :root {
