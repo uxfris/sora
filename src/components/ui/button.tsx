@@ -29,7 +29,7 @@ const buttonVariants = cva(
         "icon-xs":
           "size-6 rounded-full in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
         "icon-sm": "size-7 rounded-full in-data-[slot=button-group]:rounded-lg",
-        "icon-lg": "size-10 rounded-full",
+        "icon-lg": "size-9 rounded-full",
       },
     },
     defaultVariants: {
@@ -48,10 +48,7 @@ function Button({
   return (
     <ButtonPrimitive
       data-slot="button"
-      className={cn(
-        "cursor-pointer",
-        buttonVariants({ variant, size, className }),
-      )}
+      className={cn(buttonVariants({ variant, size, className }))}
       {...props}
     />
   );
