@@ -1,68 +1,41 @@
-"use client";
+import { ChatClient } from "@/features/chat-workspace/components/chat-client";
+import { appRoutes } from "@/routes";
+import { auth } from "@/services/auth/server";
+import { getChatWithMessages } from "@/services/db/queries/chat.queries";
+import { UIMessage } from "ai";
+import { redirect } from "next/navigation";
 
-import { useChat } from "@ai-sdk/react";
-import { DefaultChatTransport } from "ai";
-import { ChatMenu } from "@/features/chat-workspace/components/toolbar";
-import { Conversation } from "@/features/chat-workspace/components/conversation";
-import ChatComposer from "@/features/chat-workspace/components/composer";
-import { mockInitialMessages } from "@/mock/mockInitialMessages";
-import { useParams, useRouter } from "next/navigation";
-import { useCallback, useRef } from "react";
+type ChatProps = {
+  params: Promise<{ id?: string[] }>;
+};
 
-export default function Chat() {
-  const router = useRouter();
-  const params = useParams();
-  const idArray = params.id as string[] | undefined;
+export default async function Chat({ params }: ChatProps) {
+  const resolvedParams = await params;
+  const idArray = resolvedParams.id as string[] | undefined;
   const existingId = idArray?.[0];
+  const chatId = existingId ?? crypto.randomUUID();
 
-  const chatIdRef = useRef(existingId ?? crypto.randomUUID());
-  const chatId = chatIdRef.current;
+  const { data: session } = await auth.getSession();
 
-  const hasNavigationRef = useRef(!!existingId);
+  if (!session?.user) {
+    return <ChatClient id={chatId} initialMessages={[]} />;
+  }
 
-  const { messages, sendMessage, status, error, stop, regenerate } = useChat({
-    // messages: mockInitialMessages,
-    transport: new DefaultChatTransport({
-      api: "/api/chat",
-    }),
-  });
+  try {
+    const chat = await getChatWithMessages({ id: chatId });
 
-  const handleSendMessage = useCallback(
-    (text: string) => {
-      sendMessage({ text });
+    if (!chat || chat.userId !== session.user.id) {
+      return <ChatClient id={chatId} initialMessages={[]} />;
+    }
 
-      if (!hasNavigationRef.current) {
-        hasNavigationRef.current = true;
-        router.replace(`chat/${chatId}`);
-      }
-    },
-    [sendMessage, chatId, router],
-  );
+    const initialMessages: UIMessage[] = chat.messages.map((m) => ({
+      id: m.externalId,
+      role: m.role as UIMessage["role"],
+      parts: m.parts as UIMessage["parts"],
+    }));
 
-  const isNewChat = messages.length === 0;
-
-  return (
-    <section className="relative h-screen flex flex-col">
-      {isNewChat ? (
-        <div className="flex-1 flex flex-col gap-2 items-center justify-center text-center">
-          <h1 className="text-2xl font-medium">What can I help with?</h1>
-          <p className="text-sm text-muted-foreground">
-            Ask a question, write code, or explore ideas
-          </p>
-        </div>
-      ) : (
-        <Conversation
-          messages={messages}
-          status={status}
-          error={error}
-          regenerate={regenerate}
-        />
-      )}
-      <ChatComposer
-        sendMessage={(text) => handleSendMessage(text)}
-        status={status}
-      />
-      <ChatMenu />
-    </section>
-  );
+    return <ChatClient id={chatId} initialMessages={initialMessages} />;
+  } catch (error) {
+    redirect(appRoutes.chat.root);
+  }
 }

@@ -26,6 +26,7 @@ export type AggregateMessage = {
 
 export type MessageMinAggregateOutputType = {
   id: string | null
+  externalId: string | null
   createdAt: Date | null
   role: string | null
   chatId: string | null
@@ -33,6 +34,7 @@ export type MessageMinAggregateOutputType = {
 
 export type MessageMaxAggregateOutputType = {
   id: string | null
+  externalId: string | null
   createdAt: Date | null
   role: string | null
   chatId: string | null
@@ -40,6 +42,7 @@ export type MessageMaxAggregateOutputType = {
 
 export type MessageCountAggregateOutputType = {
   id: number
+  externalId: number
   createdAt: number
   parts: number
   role: number
@@ -51,6 +54,7 @@ export type MessageCountAggregateOutputType = {
 
 export type MessageMinAggregateInputType = {
   id?: true
+  externalId?: true
   createdAt?: true
   role?: true
   chatId?: true
@@ -58,6 +62,7 @@ export type MessageMinAggregateInputType = {
 
 export type MessageMaxAggregateInputType = {
   id?: true
+  externalId?: true
   createdAt?: true
   role?: true
   chatId?: true
@@ -65,6 +70,7 @@ export type MessageMaxAggregateInputType = {
 
 export type MessageCountAggregateInputType = {
   id?: true
+  externalId?: true
   createdAt?: true
   parts?: true
   role?: true
@@ -147,6 +153,7 @@ export type MessageGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 
 export type MessageGroupByOutputType = {
   id: string
+  externalId: string
   createdAt: Date
   parts: runtime.JsonValue
   role: string
@@ -177,6 +184,7 @@ export type MessageWhereInput = {
   OR?: Prisma.MessageWhereInput[]
   NOT?: Prisma.MessageWhereInput | Prisma.MessageWhereInput[]
   id?: Prisma.UuidFilter<"Message"> | string
+  externalId?: Prisma.StringFilter<"Message"> | string
   createdAt?: Prisma.DateTimeFilter<"Message"> | Date | string
   parts?: Prisma.JsonFilter<"Message">
   role?: Prisma.StringFilter<"Message"> | string
@@ -188,6 +196,7 @@ export type MessageWhereInput = {
 
 export type MessageOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  externalId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   parts?: Prisma.SortOrder
   role?: Prisma.SortOrder
@@ -199,6 +208,7 @@ export type MessageOrderByWithRelationInput = {
 
 export type MessageWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  externalId?: string
   AND?: Prisma.MessageWhereInput | Prisma.MessageWhereInput[]
   OR?: Prisma.MessageWhereInput[]
   NOT?: Prisma.MessageWhereInput | Prisma.MessageWhereInput[]
@@ -209,10 +219,11 @@ export type MessageWhereUniqueInput = Prisma.AtLeast<{
   chatId?: Prisma.UuidFilter<"Message"> | string
   chat?: Prisma.XOR<Prisma.ChatScalarRelationFilter, Prisma.ChatWhereInput>
   votes?: Prisma.VoteListRelationFilter
-}, "id">
+}, "id" | "externalId">
 
 export type MessageOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  externalId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   parts?: Prisma.SortOrder
   role?: Prisma.SortOrder
@@ -228,6 +239,7 @@ export type MessageScalarWhereWithAggregatesInput = {
   OR?: Prisma.MessageScalarWhereWithAggregatesInput[]
   NOT?: Prisma.MessageScalarWhereWithAggregatesInput | Prisma.MessageScalarWhereWithAggregatesInput[]
   id?: Prisma.UuidWithAggregatesFilter<"Message"> | string
+  externalId?: Prisma.StringWithAggregatesFilter<"Message"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Message"> | Date | string
   parts?: Prisma.JsonWithAggregatesFilter<"Message">
   role?: Prisma.StringWithAggregatesFilter<"Message"> | string
@@ -237,6 +249,7 @@ export type MessageScalarWhereWithAggregatesInput = {
 
 export type MessageCreateInput = {
   id?: string
+  externalId: string
   createdAt?: Date | string
   parts: Prisma.JsonNullValueInput | runtime.InputJsonValue
   role: string
@@ -247,6 +260,7 @@ export type MessageCreateInput = {
 
 export type MessageUncheckedCreateInput = {
   id?: string
+  externalId: string
   createdAt?: Date | string
   parts: Prisma.JsonNullValueInput | runtime.InputJsonValue
   role: string
@@ -257,6 +271,7 @@ export type MessageUncheckedCreateInput = {
 
 export type MessageUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   parts?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   role?: Prisma.StringFieldUpdateOperationsInput | string
@@ -267,6 +282,7 @@ export type MessageUpdateInput = {
 
 export type MessageUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   parts?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   role?: Prisma.StringFieldUpdateOperationsInput | string
@@ -277,6 +293,7 @@ export type MessageUncheckedUpdateInput = {
 
 export type MessageCreateManyInput = {
   id?: string
+  externalId: string
   createdAt?: Date | string
   parts: Prisma.JsonNullValueInput | runtime.InputJsonValue
   role: string
@@ -286,6 +303,7 @@ export type MessageCreateManyInput = {
 
 export type MessageUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   parts?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   role?: Prisma.StringFieldUpdateOperationsInput | string
@@ -294,6 +312,7 @@ export type MessageUpdateManyMutationInput = {
 
 export type MessageUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   parts?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   role?: Prisma.StringFieldUpdateOperationsInput | string
@@ -313,6 +332,7 @@ export type MessageOrderByRelationAggregateInput = {
 
 export type MessageCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  externalId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   parts?: Prisma.SortOrder
   role?: Prisma.SortOrder
@@ -322,6 +342,7 @@ export type MessageCountOrderByAggregateInput = {
 
 export type MessageMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  externalId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   role?: Prisma.SortOrder
   chatId?: Prisma.SortOrder
@@ -329,6 +350,7 @@ export type MessageMaxOrderByAggregateInput = {
 
 export type MessageMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  externalId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   role?: Prisma.SortOrder
   chatId?: Prisma.SortOrder
@@ -397,6 +419,7 @@ export type MessageUpdateOneRequiredWithoutVotesNestedInput = {
 
 export type MessageCreateWithoutChatInput = {
   id?: string
+  externalId: string
   createdAt?: Date | string
   parts: Prisma.JsonNullValueInput | runtime.InputJsonValue
   role: string
@@ -406,6 +429,7 @@ export type MessageCreateWithoutChatInput = {
 
 export type MessageUncheckedCreateWithoutChatInput = {
   id?: string
+  externalId: string
   createdAt?: Date | string
   parts: Prisma.JsonNullValueInput | runtime.InputJsonValue
   role: string
@@ -444,6 +468,7 @@ export type MessageScalarWhereInput = {
   OR?: Prisma.MessageScalarWhereInput[]
   NOT?: Prisma.MessageScalarWhereInput | Prisma.MessageScalarWhereInput[]
   id?: Prisma.UuidFilter<"Message"> | string
+  externalId?: Prisma.StringFilter<"Message"> | string
   createdAt?: Prisma.DateTimeFilter<"Message"> | Date | string
   parts?: Prisma.JsonFilter<"Message">
   role?: Prisma.StringFilter<"Message"> | string
@@ -453,6 +478,7 @@ export type MessageScalarWhereInput = {
 
 export type MessageCreateWithoutVotesInput = {
   id?: string
+  externalId: string
   createdAt?: Date | string
   parts: Prisma.JsonNullValueInput | runtime.InputJsonValue
   role: string
@@ -462,6 +488,7 @@ export type MessageCreateWithoutVotesInput = {
 
 export type MessageUncheckedCreateWithoutVotesInput = {
   id?: string
+  externalId: string
   createdAt?: Date | string
   parts: Prisma.JsonNullValueInput | runtime.InputJsonValue
   role: string
@@ -487,6 +514,7 @@ export type MessageUpdateToOneWithWhereWithoutVotesInput = {
 
 export type MessageUpdateWithoutVotesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   parts?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   role?: Prisma.StringFieldUpdateOperationsInput | string
@@ -496,6 +524,7 @@ export type MessageUpdateWithoutVotesInput = {
 
 export type MessageUncheckedUpdateWithoutVotesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   parts?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   role?: Prisma.StringFieldUpdateOperationsInput | string
@@ -505,6 +534,7 @@ export type MessageUncheckedUpdateWithoutVotesInput = {
 
 export type MessageCreateManyChatInput = {
   id?: string
+  externalId: string
   createdAt?: Date | string
   parts: Prisma.JsonNullValueInput | runtime.InputJsonValue
   role: string
@@ -513,6 +543,7 @@ export type MessageCreateManyChatInput = {
 
 export type MessageUpdateWithoutChatInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   parts?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   role?: Prisma.StringFieldUpdateOperationsInput | string
@@ -522,6 +553,7 @@ export type MessageUpdateWithoutChatInput = {
 
 export type MessageUncheckedUpdateWithoutChatInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   parts?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   role?: Prisma.StringFieldUpdateOperationsInput | string
@@ -531,6 +563,7 @@ export type MessageUncheckedUpdateWithoutChatInput = {
 
 export type MessageUncheckedUpdateManyWithoutChatInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   parts?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   role?: Prisma.StringFieldUpdateOperationsInput | string
@@ -570,6 +603,7 @@ export type MessageCountOutputTypeCountVotesArgs<ExtArgs extends runtime.Types.E
 
 export type MessageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  externalId?: boolean
   createdAt?: boolean
   parts?: boolean
   role?: boolean
@@ -582,6 +616,7 @@ export type MessageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 
 export type MessageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  externalId?: boolean
   createdAt?: boolean
   parts?: boolean
   role?: boolean
@@ -592,6 +627,7 @@ export type MessageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
 
 export type MessageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  externalId?: boolean
   createdAt?: boolean
   parts?: boolean
   role?: boolean
@@ -602,6 +638,7 @@ export type MessageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 
 export type MessageSelectScalar = {
   id?: boolean
+  externalId?: boolean
   createdAt?: boolean
   parts?: boolean
   role?: boolean
@@ -609,7 +646,7 @@ export type MessageSelectScalar = {
   chatId?: boolean
 }
 
-export type MessageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "parts" | "role" | "attachments" | "chatId", ExtArgs["result"]["message"]>
+export type MessageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "externalId" | "createdAt" | "parts" | "role" | "attachments" | "chatId", ExtArgs["result"]["message"]>
 export type MessageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   chat?: boolean | Prisma.ChatDefaultArgs<ExtArgs>
   votes?: boolean | Prisma.Message$votesArgs<ExtArgs>
@@ -630,6 +667,7 @@ export type $MessagePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    externalId: string
     createdAt: Date
     parts: runtime.JsonValue
     role: string
@@ -1061,6 +1099,7 @@ export interface Prisma__MessageClient<T, Null = never, ExtArgs extends runtime.
  */
 export interface MessageFieldRefs {
   readonly id: Prisma.FieldRef<"Message", 'String'>
+  readonly externalId: Prisma.FieldRef<"Message", 'String'>
   readonly createdAt: Prisma.FieldRef<"Message", 'DateTime'>
   readonly parts: Prisma.FieldRef<"Message", 'Json'>
   readonly role: Prisma.FieldRef<"Message", 'String'>

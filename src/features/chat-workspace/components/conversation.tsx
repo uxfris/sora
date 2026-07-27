@@ -24,7 +24,7 @@ export function Conversation({
 }: ConversationProps) {
   return (
     <div className="flex-1 overflow-y-auto">
-      <div className="mx-auto flex max-w-3xl flex-col gap-10 px-6 py-10">
+      <div className="mx-auto flex max-w-3xl flex-col px-6 py-10">
         {messages.map((message) => {
           const isUser = message.role === "user";
           return (
@@ -38,9 +38,14 @@ export function Conversation({
                     return <UserMessage key={index} text={part.text} />;
                   }
                   return (
-                    <div key={index}>
+                    <div key={index} className="group/message">
                       <AssistantMessage text={part.text} />
-                      {true && <AssistantMessageMenu message={part.text} />}
+                      {true && (
+                        <AssistantMessageMenu
+                          message={part.text}
+                          isLast={message.id === messages.at(-1)?.id}
+                        />
+                      )}
                     </div>
                   );
                 }

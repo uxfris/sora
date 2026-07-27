@@ -42,8 +42,9 @@ model Chat {
 }
 
 model Message {
-  id        String   @id @default(uuid()) @db.Uuid
-  createdAt DateTime @default(now()) @map("created_at")
+  id         String   @id @default(uuid()) @db.Uuid
+  externalId String   @unique
+  createdAt  DateTime @default(now()) @map("created_at")
 
   parts       Json
   role        String

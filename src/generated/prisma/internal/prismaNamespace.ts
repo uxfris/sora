@@ -850,6 +850,7 @@ export type ChatScalarFieldEnum = (typeof ChatScalarFieldEnum)[keyof typeof Chat
 
 export const MessageScalarFieldEnum = {
   id: 'id',
+  externalId: 'externalId',
   createdAt: 'createdAt',
   parts: 'parts',
   role: 'role',

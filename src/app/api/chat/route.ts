@@ -1,6 +1,10 @@
 import { Prisma } from "@/generated/prisma/client";
 import { auth } from "@/services/auth/server";
-import { prisma } from "@/services/db/client";
+import { upsertChat } from "@/services/db/queries/chat.queries";
+import {
+  createManyMessage,
+  createMessage,
+} from "@/services/db/queries/message.queries";
 import {
   UIMessage,
   convertToModelMessages,
@@ -28,25 +32,16 @@ export async function POST(req: Request) {
       if ("text" in parts) {
         title = parts.text as string;
       }
-      await prisma.chat.create({
-        data: {
-          id: chatId,
-          userId: session.user.id,
-          title: title,
-        },
-      });
+      await upsertChat({ id: chatId, userId: session.user.id, title });
     }
 
     const lastMessage = messages[messages.length - 1];
     if (lastMessage.role === "user") {
-      await prisma.message.create({
-        data: {
-          id: lastMessage.id,
-          attachments: [],
-          parts: lastMessage.parts as Prisma.InputJsonValue,
-          role: "lastMessage.role",
-          chatId,
-        },
+      await createMessage({
+        chatId: chatId,
+        externalId: lastMessage.id,
+        parts: lastMessage.parts,
+        role: lastMessage.role,
       });
     }
   }
@@ -59,7 +54,7 @@ export async function POST(req: Request) {
         messages: await convertToModelMessages(recentMessages),
         experimental_transform: smoothStream({
           delayInMs: 20, // Optional: defaults to 10ms
-          chunking: "line", // Optional: options are 'word' or 'line' (defaults to 'word')
+          chunking: "line",
         }),
       });
 
@@ -74,9 +69,9 @@ export async function POST(req: Request) {
       const assistantMessages = finishedMessages.filter(
         (m) => m.role === "assistant",
       );
-      await prisma.message.createMany({
+      await createManyMessage({
         data: assistantMessages.map((m) => ({
-          id: m.id,
+          externalId: m.id,
           attachments: [],
           parts: m.parts as Prisma.InputJsonValue,
           role: m.role,

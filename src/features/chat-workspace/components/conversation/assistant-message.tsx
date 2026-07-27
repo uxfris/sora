@@ -53,10 +53,6 @@ export function AssistantMessage({ text }: { text: string }) {
             remarkGfm,
             [remarkMath, { singleDollarTextMath: true }],
           ]}
-          // Order matters: rehype-raw parses raw HTML nodes
-          // first, rehype-sanitize strips anything unsafe
-          // (and anything not in our extended schema), then
-          // rehype-katex renders the remaining math nodes.
           rehypePlugins={[
             rehypeRaw,
             [rehypeSanitize, sanitizeSchema],
