@@ -9,25 +9,28 @@ import { useRouter } from "next/navigation";
 import { useCallback, useRef } from "react";
 import { apiRoutes } from "@/routes";
 
+// chat-client.tsx
 export function ChatClient({
   id,
   initialMessages,
+  isNewChatId,
 }: {
   id: string;
   initialMessages: UIMessage[];
+  isNewChatId: boolean;
 }) {
   const router = useRouter();
 
-  const hasNavigationRef = useRef(!!id);
+  // Sekarang bener-bener merefleksikan "apakah URL awal punya id atau enggak",
+  // bukan nebak dari truthy-ness chatId yang emang selalu ada.
+  const hasNavigatedRef = useRef(!isNewChatId);
 
   const { messages, sendMessage, status, error, stop, regenerate } = useChat({
     messages: initialMessages,
-    id: id,
+    id,
     transport: new DefaultChatTransport({
       api: apiRoutes.chat,
-      body: {
-        id: id,
-      },
+      body: { id },
     }),
   });
 
@@ -35,12 +38,12 @@ export function ChatClient({
     (text: string) => {
       sendMessage({ text });
 
-      if (!hasNavigationRef.current) {
-        hasNavigationRef.current = true;
-        router.replace(`chat/${id}`);
+      if (!hasNavigatedRef.current) {
+        hasNavigatedRef.current = true;
+        window.history.replaceState(null, "", `/chat/${id}`);
       }
     },
-    [sendMessage, id, router],
+    [sendMessage, id],
   );
 
   const isNewChat = messages.length === 0;

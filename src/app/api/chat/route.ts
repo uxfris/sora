@@ -56,7 +56,7 @@ export async function POST(req: Request) {
   const stream = createUIMessageStream({
     execute: async ({ writer: dataStream }) => {
       const result = streamText({
-        model: "inclusionai/ling-3.0-flash-free",
+        model: "google/gemini-2.5-flash-lite",
         instructions: "You are a helpful assistant",
         messages: await convertToModelMessages(recentMessages),
         experimental_transform: smoothStream({
