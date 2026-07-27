@@ -1,4 +1,5 @@
 import { Prisma } from "@/generated/prisma/client";
+import { chatEvents } from "@/lib/chat-events";
 import { auth } from "@/services/auth/server";
 import { upsertChat } from "@/services/db/queries/chat.queries";
 import {
@@ -29,10 +30,16 @@ export async function POST(req: Request) {
     if (isFirstMessage) {
       const parts = messages[0].parts;
       let title = "New chat";
-      if ("text" in parts) {
-        title = parts.text as string;
+      if (parts[0].type === "text") {
+        title = parts[0].text;
       }
-      await upsertChat({ id: chatId, userId: session.user.id, title });
+      const chat = await upsertChat({
+        id: chatId,
+        userId: session.user.id,
+        title,
+      });
+
+      chatEvents.emit("chat-created", chat);
     }
 
     const lastMessage = messages[messages.length - 1];

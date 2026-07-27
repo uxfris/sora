@@ -20,7 +20,7 @@ export async function upsertChat({
   userId: string;
   title: string;
 }) {
-  await prisma.chat.upsert({
+  return await prisma.chat.upsert({
     where: { id },
     update: {},
     create: {
