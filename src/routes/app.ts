@@ -1,5 +1,7 @@
 // routes/app.ts
 export const appRoutes = {
+  signin: "/sign-in",
+  signup: "/sign-up",
   home: "/",
   search: "/search",
   chat: {

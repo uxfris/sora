@@ -61,17 +61,15 @@ transition-opacity"
               >
                 <Tooltip>
                   <TooltipTrigger
-                    render={(props) => (
+                    render={
                       <SidebarTrigger
                         className={"cursor-pointer"}
-                        {...props}
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
-                          props.onClick?.(e);
                         }}
                       />
-                    )}
+                    }
                   ></TooltipTrigger>
                   <TooltipContent side="right">
                     <p>Close sidebar</p>
@@ -91,9 +89,7 @@ transition-opacity"
           <div className="group-data-[collapsible=icon]:opacity-0 group-data-[collapsible=icon]:pointer-events-none">
             <Tooltip>
               <TooltipTrigger
-                render={(props) => (
-                  <SidebarTrigger className={"cursor-pointer"} {...props} />
-                )}
+                render={<SidebarTrigger className={"cursor-pointer"} />}
               ></TooltipTrigger>
               <TooltipContent side="right">
                 <p>Close sidebar</p>
@@ -108,12 +104,12 @@ transition-opacity"
             <SidebarMenuButton
               className="gap-3"
               isActive={pathname === item.url}
-              render={(props) => (
-                <Link href={item.url} {...props}>
+              render={
+                <Link href={item.url}>
                   <HugeiconsIcon icon={item.icon} />
                   <span>{item.title}</span>{" "}
                 </Link>
-              )}
+              }
             />
           </SidebarMenuItem>
         ))}

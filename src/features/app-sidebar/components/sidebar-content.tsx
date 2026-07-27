@@ -41,8 +41,8 @@ export default function AppSidebarContent() {
         <Collapsible open={notebookOpen} onOpenChange={notebookOnOpenChange}>
           <SidebarGroupLabel
             className="gap-1 cursor-pointer w-full group/label"
-            render={(props) => (
-              <CollapsibleTrigger {...props}>
+            render={
+              <CollapsibleTrigger>
                 <span>Notebooks</span>
                 <HugeiconsIcon
                   size={3}
@@ -53,7 +53,7 @@ export default function AppSidebarContent() {
                   )}
                 />
               </CollapsibleTrigger>
-            )}
+            }
           />
           <SidebarGroupContent>
             <CollapsibleContent>
@@ -62,39 +62,39 @@ export default function AppSidebarContent() {
                   <SidebarMenuButton
                     isActive={pathname === appRoutes.notebook.create}
                     className="gap-3"
-                    render={(props) => (
-                      <Link href={appRoutes.notebook.create} {...props}>
+                    render={
+                      <Link href={appRoutes.notebook.create}>
                         <HugeiconsIcon icon={PlusSignIcon} />
                         <span>New Notebook</span>
                       </Link>
-                    )}
+                    }
                   />
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton
                     isActive={pathname === appRoutes.notebook.detail("1")}
                     className="justify-between"
-                    render={(props) => (
-                      <Link href={appRoutes.notebook.detail("1")} {...props}>
+                    render={
+                      <Link href={appRoutes.notebook.detail("1")}>
                         <div className="flex items-center gap-3">
                           <HugeiconsIcon icon={BookOpen02Icon} />
                           <span className="truncate">My first Notebook</span>
                         </div>
                         <HugeiconsIcon icon={Pin02Icon} className="shrink-0" />
                       </Link>
-                    )}
+                    }
                   />
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton
                     isActive={pathname === appRoutes.notebook.view}
                     className="gap-3"
-                    render={(props) => (
-                      <Link href={appRoutes.notebook.view} {...props}>
+                    render={
+                      <Link href={appRoutes.notebook.view}>
                         <HugeiconsIcon icon={MoreHorizontalIcon} />
                         <span>All Notebooks</span>
                       </Link>
-                    )}
+                    }
                   />
                 </SidebarMenuItem>
               </SidebarMenu>
@@ -106,8 +106,8 @@ export default function AppSidebarContent() {
         <Collapsible open={recentOpen} onOpenChange={recentOnOpenChange}>
           <SidebarGroupLabel
             className="gap-1 cursor-pointer w-full group/label"
-            render={(props) => (
-              <CollapsibleTrigger {...props}>
+            render={
+              <CollapsibleTrigger>
                 <span className="truncate">Recents</span>
                 <HugeiconsIcon
                   size={3}
@@ -118,7 +118,7 @@ export default function AppSidebarContent() {
                   )}
                 />
               </CollapsibleTrigger>
-            )}
+            }
           />
           <SidebarGroupContent>
             <CollapsibleContent>

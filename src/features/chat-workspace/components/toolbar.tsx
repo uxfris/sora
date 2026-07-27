@@ -23,12 +23,11 @@ export function ChatMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        render={(props) => (
+        render={
           <Button
             variant={"ghost"}
             size={"icon-lg"}
             className="absolute top-3 right-3"
-            {...props}
           >
             <HugeiconsIcon
               icon={MoreVerticalIcon}
@@ -36,7 +35,7 @@ export function ChatMenu() {
               className="size-5!"
             />
           </Button>
-        )}
+        }
       />
       <DropdownMenuContent className="w-48">
         <DropdownMenuItem>

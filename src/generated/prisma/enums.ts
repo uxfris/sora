@@ -9,7 +9,19 @@
 * 🟢 You can import this file directly.
 */
 
+export const Visibility = {
+  public: 'public',
+  private: 'private'
+} as const
+
+export type Visibility = (typeof Visibility)[keyof typeof Visibility]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const DocumentKind = {
+  text: 'text',
+  code: 'code',
+  image: 'image',
+  sheet: 'sheet'
+} as const
+
+export type DocumentKind = (typeof DocumentKind)[keyof typeof DocumentKind]

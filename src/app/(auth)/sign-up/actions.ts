@@ -1,6 +1,7 @@
 "use server";
 
 import { auth } from "@/services/auth/server";
+import { prisma } from "@/services/db/client";
 import { redirect } from "next/navigation";
 
 export async function signUpWithEmail(
@@ -18,7 +19,7 @@ export async function signUpWithEmail(
   //  return { error: 'Email must be from my-company.com' };
   // }
 
-  const { error } = await auth.signUp.email({
+  const { data, error } = await auth.signUp.email({
     email,
     name: formData.get("name") as string,
     password: formData.get("password") as string,
@@ -27,6 +28,12 @@ export async function signUpWithEmail(
   if (error) {
     return { error: error.message || "Failed to create account" };
   }
+
+  await prisma.user.create({
+    data: {
+      id: data.user.id,
+    },
+  });
 
   redirect("/");
 }

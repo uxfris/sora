@@ -2,6 +2,9 @@
 
 import { useActionState } from "react";
 import { signInWithEmail } from "./actions";
+import Link from "next/link";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export default function SignInForm() {
   const [state, formAction, isPending] = useActionState(signInWithEmail, null);
@@ -9,28 +12,24 @@ export default function SignInForm() {
   return (
     <form
       action={formAction}
-      className="flex flex-col gap-5 min-h-screen items-center justify-center bg-gray-900"
+      className="flex flex-col gap-5 min-h-screen items-center justify-center"
     >
       <div className="w-sm">
-        <h1 className="mt-10 text-center text-2xl/9 font-bold text-white">
+        <h1 className="mt-10 text-center text-2xl/9 font-bold">
           Sign in to your account
         </h1>
       </div>
 
       <div className="flex flex-col gap-1.5 w-sm">
-        <label
-          htmlFor="email"
-          className="block text-sm font-medium text-gray-100"
-        >
+        <label htmlFor="email" className="block text-sm font-medium">
           Email address
         </label>
-        <input
+        <Input
           id="email"
           name="email"
           type="email"
           required
           placeholder="john@my-company.com"
-          className="block rounded-md w-full bg-white/5 px-2 py-1.5 placeholder:text-gray-500 text-white outline-1 outline-white/10  focus:outline-indigo-500"
         />
       </div>
 
@@ -41,13 +40,12 @@ export default function SignInForm() {
         >
           Password
         </label>
-        <input
+        <Input
           id="password"
           name="password"
           type="password"
           required
           placeholder="*****"
-          className="block rounded-md w-full bg-white/5 px-2 py-1.5 placeholder:text-gray-500 text-white outline-1 outline-white/10  focus:outline-indigo-500"
         />
       </div>
 
@@ -57,13 +55,18 @@ export default function SignInForm() {
         </div>
       )}
 
-      <button
-        type="submit"
-        disabled={isPending}
-        className="flex w-sm justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400"
-      >
-        Sign in
-      </button>
+      <Button type="submit" disabled={isPending} className="w-sm">
+        {isPending ? "Loading" : "Sign in"}
+      </Button>
+
+      <div>
+        <p className="text-sm">
+          Don't have an account?{" "}
+          <Link href={"/sign-up"} className="underline">
+            Sign up
+          </Link>
+        </p>
+      </div>
     </form>
   );
 }
