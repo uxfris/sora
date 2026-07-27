@@ -13,7 +13,7 @@ export default function ChatComposer({
   sendMessage,
 }: {
   status: ChatStatus;
-  sendMessage: ReturnType<typeof useChat>["sendMessage"];
+  sendMessage: (text: string) => void;
 }) {
   const [input, setInput] = useState("");
 
@@ -23,7 +23,7 @@ export default function ChatComposer({
         onSubmit={(e) => {
           e.preventDefault();
           if (input.trim() && status === "ready") {
-            sendMessage({ text: input });
+            sendMessage(input);
             setInput("");
           }
         }}
